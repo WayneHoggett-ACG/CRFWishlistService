@@ -34,5 +34,12 @@ public static class WishlistEndpoints
             var productIds = service.GetItems(userId);
             return Results.Ok(productIds);
         });
+
+        app.MapGet("/wishlists", (
+            WishlistService service) =>
+        {
+            var wishlists = service.GetWishlists();
+            return Results.Ok(wishlists);
+        });
     }
 }

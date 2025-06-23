@@ -34,4 +34,15 @@ public class WishlistService
         var items = _tableClient.Query<WishlistItem>(x => x.PartitionKey == userId);
         return items.Select(x => int.Parse(x.RowKey));
     }
+    public Dictionary<string, List<int>> GetWishlists()
+{
+    var items = _tableClient.Query<WishlistItem>();
+
+    return items
+        .GroupBy(x => x.PartitionKey)
+        .ToDictionary(
+            g => g.Key,                          // UserId
+            g => g.Select(x => int.Parse(x.RowKey)).ToList() // ItemIds
+        );
+}
 }

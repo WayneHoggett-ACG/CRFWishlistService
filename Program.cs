@@ -3,6 +3,7 @@ using CRFWishlistService.Services;
 using CRFWishlistService.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.WebHost.UseUrls("http://*:8080");
 
 builder.Services.AddSingleton(x =>
 {

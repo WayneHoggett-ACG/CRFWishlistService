@@ -1,0 +1,29 @@
+apiVersion: 2021-09-01
+location: eastus
+name: crfwishlist-aci-group
+type: Microsoft.ContainerInstance/containerGroups
+properties:
+  osType: Linux
+  imageRegistryCredentials:
+  - server: {ACR_LOGIN_SERVER}
+    username: {ACR_LOGIN_USER}
+    password: {$ACR_LOGIN_PASSWORD}
+  containers:
+    - name: crfwishlistservice
+      properties:
+        image: {ACR_LOGIN_SERVER}/crfwishlistservice:v1
+        ports:
+          - port: 80
+        resources:
+          requests:
+            cpu: 1
+            memoryInGb: 1
+        environmentVariables:
+          - name: AzureStorage__ConnectionString
+            secureValue: {CONN_STRING}
+  ipAddress:
+    type: Public
+    ports:
+      - protocol: tcp
+        port: 80
+  restartPolicy: OnFailure

@@ -8,5 +8,5 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0.16@sha256:c149fe7e2be3baccf3cc91e9e6cdc
 WORKDIR /App
 COPY --from=build /App/out .
 
-EXPOSE 80
+EXPOSE 8080
 ENTRYPOINT ["dotnet", "CRFWishlistService.dll"]
